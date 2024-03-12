@@ -1,117 +1,44 @@
 #include <iostream>
+#include <iomanip> // Para usar setw()
 #include <string>
+#include <map>
 using namespace std;
 
+// Estrutura para armazenar os detalhes de um produto
+struct Produto {
+    string nome;
+    double precoCompra;
+    double precoVenda;
+    int quantidadeEstoqueInicial;
+    int quantidadeVendida;
+    int quantidadeAdicionada;
+};
+
 int main() {
-    // Definição das variáveis do produto 1
-    string nomeProduto1 = "Caderno";
-    double precoCompra1 = 0.50;
-    double precoVenda1 = 0.70;
-    int quantidadeEstoqueInicial1 = 50;
-    int quantidadeVendida1 = 20;
-    int quantidadeAdicionada1 = 0;
+    // Definição dos produtos
+    Produto produtos[5] = {
+        {"1-Caderno", 2.00, 5.00, 50, 20, 0},
+        {"2-Borracha", 0.20, 0.50, 100, 50, 30},
+        {"3-Caneta", 0.50, 1.50, 100, 50, 30},
+        {"4-Afia", 0.50, 1.00, 100, 53, 10},
+        {"5-Lápis", 0.20, 1.00, 100, 50, 10}
+    };
 
-    // Cálculo do estoque atual do produto 1
-    int estoqueAtual1 = quantidadeEstoqueInicial1 - quantidadeVendida1 + quantidadeAdicionada1;
+    // Exibição dos detalhes dos produtos em forma de tabela
+    cout << "Detalhes dos produtos:" << endl;
+    cout << "---------------------------------------------------------------------------------------------------------------------" << endl;
+    cout << setw(15) << left << "Nome" << setw(20) << "Preço Compra" << setw(20) << "Preço Venda" << setw(20) << "Lucro Total" << setw(25) << "Quantidade Stock" << endl;
+    cout << "---------------------------------------------------------------------------------------------------------------------" << endl;
 
-    // Cálculo do lucro total do produto 1
-    double lucroTotal1 = (precoVenda1 - precoCompra1) * (quantidadeEstoqueInicial1 - quantidadeVendida1);
+    for (int i = 0; i < 5; i++) {
+        Produto p = produtos[i];
+        int estoqueAtual = p.quantidadeEstoqueInicial - p.quantidadeVendida + p.quantidadeAdicionada;
+        double lucroTotal = (p.precoVenda - p.precoCompra) * (p.quantidadeEstoqueInicial - p.quantidadeVendida);
 
-    // Exibição dos detalhes do produto 1
-    cout << "Detalhes do produto 1:" << endl;
-    cout << "Nome: " << nomeProduto1 << endl;
-    cout << "Preço de compra: €" << precoCompra1 << endl;
-    cout << "Preço de venda: €" << precoVenda1 << endl;
-    cout << "Lucro total: €" << lucroTotal1 << endl;
-    cout << "Quantidade em estoque: " << estoqueAtual1 << endl << endl;
+        cout << setw(15) << left << p.nome << setw(20) << fixed << setprecision(2) << p.precoCompra << setw(20) << p.precoVenda << setw(20) << lucroTotal << setw(25) << estoqueAtual << endl;
+    }
 
-    // Definição das variáveis do produto 2
-    string nomeProduto2 = "Borracha";
-    double precoCompra2 = 0.20;
-    double precoVenda2 = 0.30;
-    int quantidadeEstoqueInicial2 = 100;
-    int quantidadeVendida2 = 50;
-    int quantidadeAdicionada2 = 30;
-
-    // Cálculo do estoque atual do produto 2
-    int estoqueAtual2 = quantidadeEstoqueInicial2 - quantidadeVendida2 + quantidadeAdicionada2;
-
-    // Cálculo do lucro total do produto 2
-    double lucroTotal2 = (precoVenda2 - precoCompra2) * (quantidadeEstoqueInicial2 - quantidadeVendida2);
-
-    // Exibição dos detalhes do produto 2
-    cout << "Detalhes do produto 2:" << endl;
-    cout << "Nome: " << nomeProduto2 << endl;
-    cout << "Preço de compra: €" << precoCompra2 << endl;
-    cout << "Preço de venda: €" << precoVenda2 << endl;
-    cout << "Lucro total: €" << lucroTotal2 << endl;
-    cout << "Quantidade em estoque: " << estoqueAtual2 << endl << endl;
-
-    // Definição das variáveis do produto 3
-    string nomeProduto3 = "Caneta";
-    double precoCompra3 = 0.25;
-    double precoVenda3 = 0.30;
-    int quantidadeEstoqueInicial3 = 100;
-    int quantidadeVendida3 = 50;
-    int quantidadeAdicionada3 = 30;
-
-    // Cálculo do estoque atual do produto 3
-    int estoqueAtual3 = quantidadeEstoqueInicial3 - quantidadeVendida3 + quantidadeAdicionada3;
-
-    // Cálculo do lucro total do produto 3
-    double lucroTotal3 = (precoVenda3 - precoCompra3) * (quantidadeEstoqueInicial3 - quantidadeVendida3);
-
-    // Exibição dos detalhes do produto 3
-    cout << "Detalhes do produto 3:" << endl;
-    cout << "Nome: " << nomeProduto3 << endl;
-    cout << "Preço de compra: €" << precoCompra3 << endl;
-    cout << "Preço de venda: €" << precoVenda3 << endl;
-    cout << "Lucro total: €" << lucroTotal3 << endl;
-    cout << "Quantidade em estoque: " << estoqueAtual3 << endl << endl;
-
-    // Definição das variáveis do produto 4
-    string nomeProduto4 = "Afia";
-    double precoCompra4 = 0.50;
-    double precoVenda4 = 1.0;
-    int quantidadeEstoqueInicial4 = 100;
-    int quantidadeVendida4 = 53;
-    int quantidadeAdicionada4 = 10;
-
-    // Cálculo do estoque atual do produto 4
-    int estoqueAtual4 = quantidadeEstoqueInicial4 - quantidadeVendida4 + quantidadeAdicionada4;
-
-    // Cálculo do lucro total do produto 4
-    double lucroTotal4 = (precoVenda4 - precoCompra4) * (quantidadeEstoqueInicial4 - quantidadeVendida4);
-
-    // Exibição dos detalhes do produto 4
-    cout << "Detalhes do produto 4:" << endl;
-    cout << "Nome: " << nomeProduto4 << endl;
-    cout << "Preço de compra: €" << precoCompra4 << endl;
-    cout << "Preço de venda: €" << precoVenda4 << endl;
-    cout << "Lucro total: €" << lucroTotal4 << endl;
-    cout << "Quantidade em estoque: " << estoqueAtual4 << endl << endl;
-
-    // Definição das variáveis do produto 5
-    string nomeProduto5 = "Lápis";
-    double precoCompra5 = 1.50;
-    double precoVenda5 = 2.50;
-    int quantidadeEstoqueInicial5 = 100;
-    int quantidadeVendida5 = 50;
-    int quantidadeAdicionada5 = 10;
-
-    // Cálculo do estoque atual do produto 5
-    int estoqueAtual5 = quantidadeEstoqueInicial5 - quantidadeVendida5 + quantidadeAdicionada5;
-
-    // Cálculo do lucro total do produto 5
-    double lucroTotal5 = (precoVenda5 - precoCompra5) * (quantidadeEstoqueInicial5 - quantidadeVendida5);
-
-    // Exibição dos detalhes do produto 5
-    cout << "Detalhes do produto 5:" << endl;
-    cout << "Nome: " << nomeProduto5 << endl;
-    cout << "Preço de compra: €" << precoCompra5 << endl;
-    cout << "Preço de venda: €" << precoVenda5 << endl;
-    cout << "Lucro total: €" << lucroTotal5 << endl;
-       cout << "Quantidade em estoque: " << estoqueAtual5 << endl << endl;
+    cout << "---------------------------------------------------------------------------------------------------------------------" << endl;
 
     return 0;
 }
