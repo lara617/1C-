@@ -4,7 +4,7 @@
 #include <vector>
 using namespace std;
 
-// Estrutura para armazenar os detalhes de um produto
+
 struct Produto {
     string nome;
     double precoCompra;
@@ -14,7 +14,7 @@ struct Produto {
     int quantidadeAdicionada;
 };
 
-// Função para exibir os detalhes dos produtos em forma de tabela
+
 void exibirTabelaProdutos(const vector<Produto>& produtos) {
     cout << "Detalhes dos produtos:" << endl;
     cout << "---------------------------------------------------------------------------------------------------------------------" << endl;
@@ -31,7 +31,7 @@ void exibirTabelaProdutos(const vector<Produto>& produtos) {
 }
 
 int main() {
-    // Definição dos produtos
+   
     vector<Produto> produtos = {
         {"1-Caderno", 2.00, 5.00, 50, 20, 0},
         {"2-Borracha", 0.20, 0.50, 100, 50, 30},
@@ -41,24 +41,24 @@ int main() {
     };
 
     bool continuar = true;
-    double lucroTotal = 0.0; // Variável para armazenar o lucro total
-    vector<Produto> carrinho; // Carrinho para armazenar os produtos selecionados
+    double lucroTotal = 0.0; 
+    vector<Produto> carrinho; 
 
-    // Exibir tabela de produtos
+    
     exibirTabelaProdutos(produtos);
 
     while (continuar) {
-        // Opções iniciais
+       
         int opcao;
         cout << "\n1. Comprar produto\n2. Ver o lucro\n3. Ver o carrinho\n4. Finalizar compra\n5. Sair\nEscolha uma opção: ";
         cin >> opcao;
 
         switch (opcao) {
             case 1: {
-                // Exibição dos detalhes dos produtos em forma de tabela
+               
                 exibirTabelaProdutos(produtos);
 
-                // Simulação de compra
+                
                 int escolha;
                 int quantidade;
 
@@ -79,18 +79,18 @@ int main() {
                 if (quantidade > estoqueDisponivel) {
                     cout << "Stock insuficiente. Quantidade disponível: " << estoqueDisponivel << endl;
                 } else {
-                    produtoEscolhido.quantidadeAdicionada = quantidade; // Atualiza a quantidade adicionada
-                    carrinho.push_back(produtoEscolhido); // Adiciona ao carrinho
+                    produtoEscolhido.quantidadeAdicionada = quantidade;
+                    carrinho.push_back(produtoEscolhido); 
                     cout << "Produto adicionado ao carrinho." << endl;
                 }
                 break;
             }
             case 2:
-                // Exibir o lucro total em euros
+                
                 cout << "Lucro total: €" << fixed << setprecision(2) << lucroTotal << endl;
                 break;
             case 3:
-                // Exibir o carrinho
+               
                 if (carrinho.empty()) {
                     cout << "Carrinho vazio." << endl;
                 } else {
@@ -99,18 +99,18 @@ int main() {
                 }
                 break;
             case 4: {
-                // Finalizar compra
+               
                 double totalCompra = 0.0;
                 double lucroCompra = 0.0;
                 for (const Produto& p : carrinho) {
                     totalCompra += p.precoVenda * p.quantidadeAdicionada;
-                    lucroCompra += (p.precoVenda - p.precoCompra) * p.quantidadeAdicionada; // Calcula o lucro da compra
-                    produtos[&p - &carrinho[0]].quantidadeVendida += p.quantidadeAdicionada; // Atualiza a quantidade vendida
+                    lucroCompra += (p.precoVenda - p.precoCompra) * p.quantidadeAdicionada; 
+                    produtos[&p - &carrinho[0]].quantidadeVendida += p.quantidadeAdicionada; 
                 }
-                lucroTotal += lucroCompra; // Adiciona o lucro da compra ao lucro total
-                carrinho.clear(); // Limpa o carrinho
+                lucroTotal += lucroCompra; 
+                carrinho.clear(); 
 
-                // Calcula o troco em euros
+                
                 double valorPago;
                 cout << "Total a pagar: €" << fixed << setprecision(2) << totalCompra << endl;
                 cout << "Digite o valor pago: €";
@@ -124,14 +124,13 @@ int main() {
                     cout << "Compra realizada com sucesso." << endl;
                 }
 
-                // Atualiza o estoque
                 for (Produto& p : produtos) {
                     p.quantidadeEstoqueInicial = p.quantidadeEstoqueInicial - p.quantidadeVendida + p.quantidadeAdicionada;
-                    p.quantidadeAdicionada = 0; // Reinicia a quantidade adicionada
-                    p.quantidadeVendida = 0; // Reinicia a quantidade vendida
+                    p.quantidadeAdicionada = 0; 
+                    p.quantidadeVendida = 0; 
                 }
 
-                // Exibe a tabela de produtos atualizada
+                
                 exibirTabelaProdutos(produtos);
                 break;
             }
