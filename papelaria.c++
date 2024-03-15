@@ -130,7 +130,7 @@ int main() {
                     p.quantidadeVendida = 0; 
                 }
 
-                
+            
                 exibirTabelaProdutos(produtos);
                 break;
             }
